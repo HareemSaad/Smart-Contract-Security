@@ -2,6 +2,7 @@
 In this repository I have created ...
 - A vunerable smart contract 
 - An attacker contract to attack it
+- A safe contract that is immune to tx.orogin phishing attack
 
 The Attack is succesful because the vunerable contract uses tx.origin to verify the owner, which is a bad idea since a contract can also act on your behalf if you use it to verify access.
 
