@@ -11,11 +11,16 @@ contract Victim {
         update = _update;
     }
 
+    //delegate call present in fallback function 
+    //which is triggered when ether is send or a non-existing function is called
+    //since delegate call preserves context msg.sender of the trigger is the msg.sender
     fallback() external {
         (bool success, bytes memory data) = address(update).delegatecall(msg.data);
         require(success, "failed");
     }
 }
+
+//victim contract uses this contract
 
 contract Update {
     address public owner;
@@ -25,6 +30,8 @@ contract Update {
     }
 }
 
+//triggers victim's fallback
+//send funtion to call in msg.data
 contract Attacker {
     Victim public victim;
 
